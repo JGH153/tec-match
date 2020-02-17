@@ -1,0 +1,12 @@
+<div class="page-container">
+	
+	<app-card 
+		#myElement
+		class="card-container" 
+		*ngFor="let card of cards"
+		[card]="card"
+		(cardDone)="cardDone($event)"
+		>	
+	</app-card>
+
+</div>

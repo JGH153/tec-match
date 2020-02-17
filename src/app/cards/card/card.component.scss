@@ -1,0 +1,88 @@
+.card-container{
+	--card-margin: 20px;
+	--rot: 0deg;
+	--offsetX: 0px;
+	--offsetY: 0px;
+	--background-color: var(--color-blue);
+
+	position: absolute;
+	top: 0px;
+	left: 0px;
+
+	height: calc(100% - calc(var(--card-margin) * 2));
+	width: calc(100% - calc(var(--card-margin) * 2));
+	margin: var(--card-margin);
+	box-shadow: 0 2px 7px rgba(127, 127, 127, .5);
+	border-radius: 5px;
+	padding: 50px 0;
+	background: var(--color-blue);
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+
+	user-select: none;
+
+	transform: rotate(var(--rot)) translateX(var(--offsetX)) translateY(var(--offsetY));
+
+	.tec-container {
+		
+		.image-container {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			img {
+				max-width: 300px;
+			}
+		}
+		.title {
+			text-align: center;
+			font-size: 60px;
+		}
+	}
+
+	.reaction-container {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-evenly;
+		align-items: center;
+		width: 100%;
+		// margin-bottom: 50px;
+
+		.reaction {
+			// 1.618
+			--reaction-size: 100px;
+			border-radius: 100%;
+			font-size: var(--reaction-size);
+			width: calc(var(--reaction-size) * 2);
+			height: calc(var(--reaction-size) * 2);
+			line-height: var(--reaction-size);
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			border: 0px;
+			outline: unset;
+			cursor: pointer;
+
+			box-shadow: 0 2px 7px rgba(127, 127, 127, .5);
+
+			&:hover {
+				transform: scale(1.1);
+			}
+			&:active {
+				transform: scale(0.9);
+			}
+
+			&.dislike {
+				background: var(--color-red);
+			}
+			&.like {
+				background: var(--color-green);
+			}
+		}
+	}
+	
+}

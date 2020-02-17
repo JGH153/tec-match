@@ -1,0 +1,21 @@
+<div 
+  #myCard
+  class="card-container"    
+>
+  <div class="tec-container">
+    <div class="image-container">
+      <img src="assets/card-icons/{{card.imagName}}">
+    </div>
+    <h1 class="title">
+      {{card.name}}
+    </h1>
+  </div>
+  <div class="reaction-container">
+    <button class="reaction dislike" (click)="dislike()">
+      👎
+    </button>
+    <button class="reaction like" (click)="like()">
+      👍
+    </button>
+  </div>
+</div>

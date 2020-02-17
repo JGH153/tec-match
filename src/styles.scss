@@ -1,4 +1,34 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@import "~normalize.css/normalize.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+:root {
+  --color-yellow: #fed546;
+  --color-red: #ff5f63;
+  --color-green: #49bca1;
+  --color-blue: #29cff5;
+  --color-background: #111111;
+
+  --vh1: 1vh;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  --font: "Open Sans", sans-serif;
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.2px;
+  color: white;
+  overflow: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
