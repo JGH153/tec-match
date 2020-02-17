@@ -29,18 +29,6 @@ export class CardsComponent implements OnInit {
     this.cards = this.cardsService.cards
       .slice(this.currentCardIndex, this.cardsService.cards.length)
       .reverse();
-    console.table(this.cardsService.cards.slice(this.currentCardIndex, this.cardsService.cards.length));
-    console.log(this.currentCardIndex, this.cardsService.cards);
-  }
-
-  dropDislike(event) {
-    console.log(event);
-    this.goToNextCard();
-  }
-
-  dropLike(event) {
-    console.log(event);
-    this.goToNextCard();
   }
 
 }

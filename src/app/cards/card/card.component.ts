@@ -22,8 +22,11 @@ export class CardComponent implements OnInit, AfterViewInit {
   offsetY = 0;
   lastEventX = -1;
   lastEventY = -1;
+  cardMoving = false;
 
-  dragThreshold = 200;
+  dragThreshold = 50;
+  dragSpeedAuto = 20;
+  acceleration = 1.15;
 
   constructor() { }
 
@@ -48,6 +51,7 @@ export class CardComponent implements OnInit, AfterViewInit {
         if (this.lastEventX < 0) {
           this.lastEventX = move.clientX;
           this.lastEventY = move.clientY;
+          this.cardMoving = true;
         }
         this.moveCard(move.clientX - this.lastEventX, move.clientY - this.lastEventY)
         this.lastEventX = move.clientX;
@@ -59,17 +63,43 @@ export class CardComponent implements OnInit, AfterViewInit {
       next: () => {
         if (Math.abs(this.offsetX) > this.dragThreshold) {
           if (this.offsetX < 0) {
-            this.dislike();
-          } else {
-            this.like();
+            this.trowDislike();
+          } else {       
+            this.throwLike();
           }
         } else {
           this.offsetX = 0;
           this.offsetY = 0;
+          this.cardMoving = false;
         }
       }
-    })
+    });
+  }
 
+  throwLike() {
+    if(this.offsetX > this.dragThreshold * 15) {
+      this.like();
+      return;
+    }
+    this.offsetX += this.dragSpeedAuto;
+    this.dragSpeedAuto *= this.acceleration;
+    this.updateCardCssVars();
+    requestAnimationFrame(() => {
+      this.throwLike();
+    });
+  }
+
+  trowDislike() {
+    if(this.offsetX < -this.dragThreshold * 15) {
+      this.dislike();
+      return;
+    }
+    this.offsetX -= this.dragSpeedAuto;
+    this.dragSpeedAuto *= this.acceleration;
+    this.updateCardCssVars();
+    requestAnimationFrame(() => {
+      this.trowDislike();
+    });
   }
 
   unsetLastEvent() {

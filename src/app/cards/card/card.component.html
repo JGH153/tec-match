@@ -4,13 +4,13 @@
 >
   <div class="tec-container">
     <div class="image-container">
-      <img src="assets/card-icons/{{card.imagName}}">
+      <img src="assets/card-icons/{{card.imagName}}" draggable="false">
     </div>
     <h1 class="title">
       {{card.name}}
     </h1>
   </div>
-  <div class="reaction-container">
+  <div class="reaction-container" [ngClass]="{'hide': cardMoving }">
     <button class="reaction dislike" (click)="dislike()">
       👎
     </button>
