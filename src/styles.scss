@@ -32,3 +32,22 @@ body {
 * {
   box-sizing: border-box;
 }
+
+
+.mat-raised-button {
+  border-radius: 100px !important;
+  padding: 10px 30px !important;
+  font-size: 16px !important;
+  min-width: 170px !important;
+  font-weight: 600;
+}
+
+.mat-raised-button.mat-primary {
+  background-color: rgba(0, 52, 89, 1);
+  color: rgba(41, 207, 245, 1);
+}
+
+.mat-raised-button.mat-secondary {
+  background-color: white;
+  color: rgba(0, 52, 89, 1);
+}
