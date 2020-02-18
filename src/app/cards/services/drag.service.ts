@@ -8,7 +8,7 @@ export class DragService {
   constructor() { }
 
   getCardDrag(cardHtmlElement) {
-    
+
   }
 
 }

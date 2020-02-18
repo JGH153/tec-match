@@ -1,0 +1,21 @@
+:host {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	height: 100%;
+}
+
+.name {
+	text-align: center;
+}
+
+.person-img-container {
+	.person-img {
+		width: 40vw;
+		height: 40vw;
+		object-fit: cover;
+		border-radius: 100%;
+	overflow: hidden;
+	}
+}

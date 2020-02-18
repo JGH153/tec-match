@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "TecMatch"
+  "defaultProject": "TecMatch",
+  "cli": {
+    "analytics": "88ab4e43-e251-44ee-90bc-142ae6f371ad"
+  }
 }

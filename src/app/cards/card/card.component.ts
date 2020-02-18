@@ -13,7 +13,7 @@ export class CardComponent implements OnInit, AfterViewInit {
   @Input() card: Card;
 
   // bool is like
-  @Output() cardDone = new EventEmitter<boolean>()
+  @Output() cardDone = new EventEmitter<boolean>();
 
   @ViewChild('myCard') myCard;
 
@@ -25,7 +25,7 @@ export class CardComponent implements OnInit, AfterViewInit {
   cardMoving = false;
 
   dragThreshold = 50;
-  dragSpeedAuto = 20;
+  dragSpeedAuto = 30;
   acceleration = 1.15;
 
   constructor() { }
@@ -35,11 +35,12 @@ export class CardComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    const move$ = fromEvent(this.myCard.nativeElement, 'mousemove')
-    const down$ = fromEvent(this.myCard.nativeElement, 'mousedown')
-    const up$ = fromEvent(this.myCard.nativeElement, 'mouseup').pipe(tap(() => this.unsetLastEvent()))
-    const leave$ = fromEvent(this.myCard.nativeElement, 'mouseleave').pipe(tap(() => this.unsetLastEvent()))
+    const move$ = fromEvent(this.myCard.nativeElement, 'mousemove');
+    const down$ = fromEvent(this.myCard.nativeElement, 'mousedown');
+    const up$ = fromEvent(this.myCard.nativeElement, 'mouseup').pipe(tap(() => this.unsetLastEvent()));
+    const leave$ = fromEvent(this.myCard.nativeElement, 'mouseleave').pipe(tap(() => this.unsetLastEvent()));
 
+    // add lastEventX inside mergeMap somehow
     const mouseDrag$ = down$.pipe(
       mergeMap(down => move$.pipe(takeUntil(up$), takeUntil(leave$)))
     );
@@ -53,7 +54,7 @@ export class CardComponent implements OnInit, AfterViewInit {
           this.lastEventY = move.clientY;
           this.cardMoving = true;
         }
-        this.moveCard(move.clientX - this.lastEventX, move.clientY - this.lastEventY)
+        this.moveCard(move.clientX - this.lastEventX, move.clientY - this.lastEventY);
         this.lastEventX = move.clientX;
         this.lastEventY = move.clientY;
       }
@@ -64,7 +65,7 @@ export class CardComponent implements OnInit, AfterViewInit {
         if (Math.abs(this.offsetX) > this.dragThreshold) {
           if (this.offsetX < 0) {
             this.trowDislike();
-          } else {       
+          } else {
             this.throwLike();
           }
         } else {
@@ -77,7 +78,8 @@ export class CardComponent implements OnInit, AfterViewInit {
   }
 
   throwLike() {
-    if(this.offsetX > this.dragThreshold * 15) {
+    this.cardMoving = true;
+    if (this.offsetX > this.dragThreshold * 15) {
       this.like();
       return;
     }
@@ -90,7 +92,8 @@ export class CardComponent implements OnInit, AfterViewInit {
   }
 
   trowDislike() {
-    if(this.offsetX < -this.dragThreshold * 15) {
+    this.cardMoving = true;
+    if (this.offsetX < -this.dragThreshold * 15) {
       this.dislike();
       return;
     }
@@ -104,7 +107,7 @@ export class CardComponent implements OnInit, AfterViewInit {
 
   unsetLastEvent() {
     this.lastEventX = -1;
-    this.lastEventY = -1
+    this.lastEventY = -1;
     this.updateCardCssVars();
   }
 
@@ -124,9 +127,9 @@ export class CardComponent implements OnInit, AfterViewInit {
   }
 
   updateCardCssVars() {
-    if(this.offsetX < -this.dragThreshold) {
+    if (this.offsetX < -this.dragThreshold) {
       this.myCard.nativeElement.style.setProperty('background', 'var(--color-red)');
-    } else if(this.offsetX > this.dragThreshold) {
+    } else if (this.offsetX > this.dragThreshold) {
       this.myCard.nativeElement.style.setProperty('background', 'var(--color-green)');
     } else {
       this.myCard.nativeElement.style.setProperty('background', 'var(--color-blue)');

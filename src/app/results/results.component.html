@@ -1,0 +1,65 @@
+<div class="page-container">
+
+  <h1 class="main-title">Gratulerer, du passer best i:</h1>
+
+  <app-outcome-department *ngIf="mostPopularOutcome === Outcome.Frontend" [personImgSrc]="'Frontend.jpg'">
+    <ng-container ngProjectAs="name">
+      Frontend!
+    </ng-container>
+    <ng-container ngProjectAs="personText">
+      Jeg liker frontend! "Martin eller noe, 31"
+    </ng-container>
+    <ng-container ngProjectAs="departmentText">
+      Brukeropplevelse og digitale flater er en kul plass!
+    </ng-container>
+  </app-outcome-department>
+
+  <app-outcome-department *ngIf="mostPopularOutcome === Outcome.DataScience" [personImgSrc]="'DataScience.jpg'">
+    <ng-container ngProjectAs="name">
+      Data Science!
+    </ng-container>
+    <ng-container ngProjectAs="personText">
+      Jeg liker frontend! "Martin eller noe, 31"
+    </ng-container>
+    <ng-container ngProjectAs="departmentText">
+      Brukeropplevelse og digitale flater er en kul plass!
+    </ng-container>
+  </app-outcome-department>
+
+  <app-outcome-department *ngIf="mostPopularOutcome === Outcome.DesignAndUx" [personImgSrc]="'DesignAndUx.jpg'">
+    <ng-container ngProjectAs="name">
+      Design and or UX
+    </ng-container>
+    <ng-container ngProjectAs="personText">
+      Jeg liker frontend! "Martin eller noe, 31"
+    </ng-container>
+    <ng-container ngProjectAs="departmentText">
+      Brukeropplevelse og digitale flater er en kul plass!
+    </ng-container>
+  </app-outcome-department>
+
+  <app-outcome-department *ngIf="mostPopularOutcome === Outcome.Java" [personImgSrc]="'Java.jpg'">
+    <ng-container ngProjectAs="name">
+      Java
+    </ng-container>
+    <ng-container ngProjectAs="personText">
+      Jeg liker frontend! "Martin eller noe, 31"
+    </ng-container>
+    <ng-container ngProjectAs="departmentText">
+      Brukeropplevelse og digitale flater er en kul plass!
+    </ng-container>
+  </app-outcome-department>
+
+  <app-outcome-department *ngIf="mostPopularOutcome === Outcome.dotNet" [personImgSrc]="'dotNet.jpg'">
+    <ng-container ngProjectAs="name">
+      Microsoft
+    </ng-container>
+    <ng-container ngProjectAs="personText">
+      Jeg liker frontend! "Martin eller noe, 31"
+    </ng-container>
+    <ng-container ngProjectAs="departmentText">
+      Brukeropplevelse og digitale flater er en kul plass!
+    </ng-container>
+  </app-outcome-department>
+
+</div>
