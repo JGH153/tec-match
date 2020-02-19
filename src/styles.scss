@@ -33,6 +33,11 @@ body {
   box-sizing: border-box;
 }
 
+router-outlet ~ * {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
 
 .mat-raised-button {
   border-radius: 100px !important;
