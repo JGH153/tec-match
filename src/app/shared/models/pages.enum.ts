@@ -1,5 +1,6 @@
 export enum Pages {
-  Cards = 'cards',
-  Results = 'results',
   Welcome = '',
+  Cards = 'cards',
+  Crunching = 'crunching',
+  Results = 'results',
 }

@@ -3,7 +3,6 @@
 	--rot: 0deg;
 	--offsetX: 0px;
 	--offsetY: 0px;
-	--background-color: var(--color-blue);
 
 	position: absolute;
 	top: 0px;
@@ -12,10 +11,10 @@
 	height: calc(100% - calc(var(--card-margin) * 2));
 	width: calc(100% - calc(var(--card-margin) * 2));
 	margin: var(--card-margin);
-	box-shadow: 0 2px 7px rgba(127, 127, 127, .5);
+	box-shadow: 0 2px 7px rgba(0, 0, 0, .5);
 	border-radius: 5px;
 	padding: 60px 0;
-	background: var(--color-blue);
+	background: var(--color-background);
 
 	@media screen and (max-height: 600px) {
 		padding: 10px 0;

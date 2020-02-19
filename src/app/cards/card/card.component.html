@@ -10,12 +10,14 @@
       {{card.name}}
     </h1>
   </div>
-  <div class="reaction-container" [ngClass]="{'hide': cardMoving }">
+  <div class="reaction-container" [ngClass]="{'hide': cardOverThreshold }">
     <button class="reaction dislike" (click)="trowDislike()">
-      👎
+      <!-- 👎 -->
+      😒
     </button>
     <button class="reaction like" (click)="throwLike()">
-      👍
+      <!-- 👍 -->
+      😃
     </button>
   </div>
 </div>

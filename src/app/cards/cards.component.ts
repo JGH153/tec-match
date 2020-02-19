@@ -22,7 +22,7 @@ export class CardsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.currentCardIndex = this.cardsService.cards.length - 2; // temp
+    this.currentCardIndex = this.cardsService.cards.length - 2; // temp
 
     // reverse to make first card display on top of the other
     this.cards = this.cardsService.cards.slice(this.currentCardIndex).reverse();
@@ -44,7 +44,7 @@ export class CardsComponent implements OnInit {
 
     if (this.cards.length === 0) {
       console.log(this.cardsService.getOutcomes());
-      this.router.navigate([Pages.Results]);
+      this.router.navigate([Pages.Crunching]);
     }
   }
 

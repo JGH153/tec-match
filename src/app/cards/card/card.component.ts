@@ -22,7 +22,7 @@ export class CardComponent implements OnInit, AfterViewInit {
   offsetY = 0;
   lastEventX = -1;
   lastEventY = -1;
-  cardMoving = false;
+  cardOverThreshold = false;
 
   dragThreshold = 50;
   dragSpeedAuto = 30;
@@ -52,7 +52,6 @@ export class CardComponent implements OnInit, AfterViewInit {
         if (this.lastEventX < 0) {
           this.lastEventX = move.clientX;
           this.lastEventY = move.clientY;
-          this.cardMoving = true;
         }
         this.moveCard(move.clientX - this.lastEventX, move.clientY - this.lastEventY);
         this.lastEventX = move.clientX;
@@ -71,14 +70,14 @@ export class CardComponent implements OnInit, AfterViewInit {
         } else {
           this.offsetX = 0;
           this.offsetY = 0;
-          this.cardMoving = false;
+          this.cardOverThreshold = false;
         }
       }
     });
   }
 
   throwLike() {
-    this.cardMoving = true;
+    this.cardOverThreshold = true;
     if (this.offsetX > this.dragThreshold * 15) {
       this.like();
       return;
@@ -92,7 +91,7 @@ export class CardComponent implements OnInit, AfterViewInit {
   }
 
   trowDislike() {
-    this.cardMoving = true;
+    this.cardOverThreshold = true;
     if (this.offsetX < -this.dragThreshold * 15) {
       this.dislike();
       return;
@@ -129,10 +128,13 @@ export class CardComponent implements OnInit, AfterViewInit {
   updateCardCssVars() {
     if (this.offsetX < -this.dragThreshold) {
       this.myCard.nativeElement.style.setProperty('background', 'var(--color-red)');
+      this.cardOverThreshold = true;
     } else if (this.offsetX > this.dragThreshold) {
       this.myCard.nativeElement.style.setProperty('background', 'var(--color-green)');
+      this.cardOverThreshold = true;
     } else {
-      this.myCard.nativeElement.style.setProperty('background', 'var(--color-blue)');
+      this.myCard.nativeElement.style.setProperty('background', 'var(--color-background)');
+      this.cardOverThreshold = false;
     }
     this.myCard.nativeElement.style.setProperty('--offsetX', this.offsetX + 'px');
     this.myCard.nativeElement.style.setProperty('--offsetY', this.offsetY + 'px');

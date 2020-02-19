@@ -1,0 +1,17 @@
+.crunching-container {
+	display: flex;
+  flex-direction: column;
+  background-color: #111111;
+	height: calc(var(--vh1, 1vh) * 100);
+
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.title {
+	text-align: center;
+}
+
+.loading {
+	width: 100vw;
+}

@@ -1,8 +1,12 @@
 .page-container {
 	display: flex;
   flex-direction: column;
-  background-color: #111111;
+  background-color: black;
 	height: calc(var(--vh1, 1vh) * 100);
 	
 	position: relative;
+
+	background-image: url('./../../assets/logo-white.png');
+  background-repeat: no-repeat;
+  background-position: center center;
 }
