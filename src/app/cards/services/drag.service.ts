@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { fromEvent, merge } from 'rxjs';
-import { map, takeUntil, mergeMap, tap } from 'rxjs/operators';
+import { map, takeUntil, mergeMap, tap, throttleTime } from 'rxjs/operators';
 import { Vec2 } from 'src/app/shared/models/vec2.interface';
 
 @Injectable({
@@ -34,7 +34,7 @@ export class DragService {
 
     return down$.pipe(
       mergeMap(down => move$.pipe(takeUntil(this.getCardDrop(cardHtmlElement)), takeUntil(this.getCardLeave(cardHtmlElement))))
-    );
+    ).pipe(throttleTime(40)); // reduce amount of events for slow mobile
   }
 
   getCardStop(cardHtmlElement) {
