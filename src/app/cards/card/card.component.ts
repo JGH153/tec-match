@@ -1,14 +1,16 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { Card } from 'src/app/shared/models/card.interface';
-import { fromEvent, merge } from 'rxjs';
-import { mergeMap, takeUntil, tap } from 'rxjs/operators';
+import { fromEvent, merge, Subscription } from 'rxjs';
+import { mergeMap, takeUntil, tap, map } from 'rxjs/operators';
+import { Vec2 } from 'src/app/shared/models/vec2.interface';
+import { DragService } from '../services/drag.service';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss']
 })
-export class CardComponent implements OnInit, AfterViewInit {
+export class CardComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Input() card: Card;
 
@@ -28,52 +30,59 @@ export class CardComponent implements OnInit, AfterViewInit {
   dragSpeedAuto = 30;
   acceleration = 1.15;
 
-  constructor() { }
+  subscriptions = new Subscription();
+
+  constructor(
+    private dragService: DragService
+  ) { }
 
   ngOnInit() {
 
   }
 
   ngAfterViewInit() {
-    const move$ = fromEvent(this.myCard.nativeElement, 'mousemove');
-    const down$ = fromEvent(this.myCard.nativeElement, 'mousedown');
-    const up$ = fromEvent(this.myCard.nativeElement, 'mouseup').pipe(tap(() => this.unsetLastEvent()));
-    const leave$ = fromEvent(this.myCard.nativeElement, 'mouseleave').pipe(tap(() => this.unsetLastEvent()));
-
-    // add lastEventX inside mergeMap somehow
-    const mouseDrag$ = down$.pipe(
-      mergeMap(down => move$.pipe(takeUntil(up$), takeUntil(leave$)))
+    this.subscriptions.add(
+      this.dragService.getCardDrag(this.myCard.nativeElement).subscribe({
+        next: (move: Vec2) => this.onCardDrag(move)
+      })
     );
 
-    const stop$ = merge(up$, leave$);
+    this.subscriptions.add(
+      this.dragService.getCardStop(this.myCard.nativeElement).subscribe({
+        next: () => this.onCardStop()
+      })
+    );
+  }
 
-    mouseDrag$.subscribe({
-      next: (move: MouseEvent) => {
-        if (this.lastEventX < 0) {
-          this.lastEventX = move.clientX;
-          this.lastEventY = move.clientY;
-        }
-        this.moveCard(move.clientX - this.lastEventX, move.clientY - this.lastEventY);
-        this.lastEventX = move.clientX;
-        this.lastEventY = move.clientY;
-      }
-    });
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
+  }
 
-    stop$.subscribe({
-      next: () => {
-        if (Math.abs(this.offsetX) > this.dragThreshold) {
-          if (this.offsetX < 0) {
-            this.trowDislike();
-          } else {
-            this.throwLike();
-          }
-        } else {
-          this.offsetX = 0;
-          this.offsetY = 0;
-          this.cardOverThreshold = false;
-        }
+  onCardDrag(move: Vec2) {
+    if (this.lastEventX < 0) {
+      this.lastEventX = move.x;
+      this.lastEventY = move.y;
+    }
+    this.moveCard(move.x - this.lastEventX, move.y - this.lastEventY);
+    this.lastEventX = move.x;
+    this.lastEventY = move.y;
+  }
+
+  // drop and leave
+  onCardStop() {
+    this.unsetLastEvent();
+    if (Math.abs(this.offsetX) > this.dragThreshold) {
+      if (this.offsetX < 0) {
+        this.trowDislike();
+      } else {
+        this.throwLike();
       }
-    });
+    } else {
+      this.offsetX = 0;
+      this.offsetY = 0;
+      this.cardOverThreshold = false;
+      this.updateCardCssVars();
+    }
   }
 
   throwLike() {
