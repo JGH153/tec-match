@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { fromEvent, merge } from 'rxjs';
+import { fromEvent, merge, Observable } from 'rxjs';
 import { map, takeUntil, mergeMap, tap, throttleTime } from 'rxjs/operators';
 import { Vec2 } from 'src/app/shared/models/vec2.interface';
 
@@ -10,35 +10,38 @@ export class DragService {
 
   constructor() { }
 
-  getCardDrop(cardHtmlElement) {
+  getDrop(htmlElement): Observable<null> {
     return merge(
-      fromEvent(cardHtmlElement, 'mouseup').pipe(map((e: MouseEvent) => null)),
-      fromEvent(cardHtmlElement, 'touchend').pipe(map((e: TouchEvent) => null)),
+      fromEvent(htmlElement, 'mouseup').pipe(map((e: MouseEvent) => null)),
+      fromEvent(htmlElement, 'touchend').pipe(map((e: TouchEvent) => null)),
     );
   }
 
-  getCardLeave(cardHtmlElement) {
+  getLeave(htmlElement): Observable<null> {
     // does not need touchleave, handled by touchend
-    return fromEvent(cardHtmlElement, 'mouseleave').pipe(map((e: MouseEvent) => null));
+    return fromEvent(htmlElement, 'mouseleave').pipe(map((e: MouseEvent) => null));
   }
 
-  getCardDrag(cardHtmlElement) {
+  getDrag(htmlElement): Observable<Vec2 | null> {
     const move$ = merge(
-      fromEvent(cardHtmlElement, 'mousemove').pipe(map((e: MouseEvent) => this.mouseToVec2(e))),
-      fromEvent(cardHtmlElement, 'touchmove').pipe(map((e: TouchEvent) => this.touchToVec2(e))),
+      fromEvent(htmlElement, 'mousemove').pipe(map((e: MouseEvent) => this.mouseToVec2(e))),
+      fromEvent(htmlElement, 'touchmove').pipe(map((e: TouchEvent) => this.touchToVec2(e))),
     );
     const down$ = merge(
-      fromEvent(cardHtmlElement, 'mousedown').pipe(map((e: MouseEvent) => this.mouseToVec2(e))),
-      fromEvent(cardHtmlElement, 'touchstart').pipe(map((e: TouchEvent) => this.touchToVec2(e))),
+      fromEvent(htmlElement, 'mousedown').pipe(map((e: MouseEvent) => this.mouseToVec2(e))),
+      fromEvent(htmlElement, 'touchstart').pipe(map((e: TouchEvent) => this.touchToVec2(e))),
     );
 
     return down$.pipe(
-      mergeMap(down => move$.pipe(takeUntil(this.getCardDrop(cardHtmlElement)), takeUntil(this.getCardLeave(cardHtmlElement))))
-    ).pipe(throttleTime(40)); // reduce amount of events for slow mobile
+      mergeMap(down => move$.pipe(
+        takeUntil(this.getDrop(htmlElement)),
+        takeUntil(this.getLeave(htmlElement))
+      ))
+    ).pipe(throttleTime(20)); // reduce amount of events for slow mobile
   }
 
-  getCardStop(cardHtmlElement) {
-    return merge(this.getCardDrop(cardHtmlElement), this.getCardLeave(cardHtmlElement));
+  getStop(htmlElement): Observable<null> {
+    return merge(this.getDrop(htmlElement), this.getLeave(htmlElement));
   }
 
   mouseToVec2(event: MouseEvent): Vec2 {
@@ -47,6 +50,7 @@ export class DragService {
 
   // track only first finger
   touchToVec2(event: TouchEvent): Vec2 | null {
+    // if no finger touching
     if (event.touches.length === 0) {
       return null;
     }

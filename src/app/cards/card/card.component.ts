@@ -42,13 +42,13 @@ export class CardComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     this.subscriptions.add(
-      this.dragService.getCardDrag(this.myCard.nativeElement).subscribe({
+      this.dragService.getDrag(this.myCard.nativeElement).subscribe({
         next: (move: Vec2) => this.onCardDrag(move)
       })
     );
 
     this.subscriptions.add(
-      this.dragService.getCardStop(this.myCard.nativeElement).subscribe({
+      this.dragService.getStop(this.myCard.nativeElement).subscribe({
         next: () => this.onCardStop()
       })
     );
@@ -59,6 +59,7 @@ export class CardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onCardDrag(move: Vec2) {
+    console.log('move');
     if (this.lastEventX < 0) {
       this.lastEventX = move.x;
       this.lastEventY = move.y;
@@ -145,6 +146,8 @@ export class CardComponent implements OnInit, AfterViewInit, OnDestroy {
       this.myCard.nativeElement.style.setProperty('background', 'var(--color-background)');
       this.cardOverThreshold = false;
     }
+
+    // to slow on mobile. can improve?
     this.myCard.nativeElement.style.setProperty('--offsetX', this.offsetX + 'px');
     this.myCard.nativeElement.style.setProperty('--offsetY', this.offsetY + 'px');
   }

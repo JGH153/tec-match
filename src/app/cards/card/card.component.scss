@@ -1,6 +1,5 @@
 .card-container{
 	--card-margin: 20px;
-	--rot: 0deg;
 	--offsetX: 0px;
 	--offsetY: 0px;
 
@@ -30,7 +29,7 @@
 
 	user-select: none;
 
-	transform: rotate(var(--rot)) translateX(var(--offsetX)) translateY(var(--offsetY));
+	transform: translateX(var(--offsetX)) translateY(var(--offsetY));
 
 	.tec-container {
 		
