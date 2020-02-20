@@ -2,20 +2,24 @@
 	<ng-content select="name"></ng-content>
 </h2>
 
-<div class="person-img-container">
-	<img
-		src="assets/test-people/{{personImgSrc}}"
-		class="person-img"
-	>
+<div class="person-group">
+	<div class="person-img-container">
+		<img
+			src="assets/test-people/{{personImgSrc}}"
+			class="person-img"
+		>
+	</div>
+	<p class="person-text">
+		<ng-content select="personText"></ng-content>
+	</p>
 </div>
-
-<p class="person-text">
-	<ng-content select="personText"></ng-content>
-</p>
 <p class="department-text">
 	<ng-content select="departmentText"></ng-content>
 </p>
 
 
 
-<button mat-raised-button color="primary">Apply</button>
+<button
+	mat-raised-button
+	color="primary"
+>Apply</button>
