@@ -17,7 +17,7 @@ const cards: Card[] = [
   },
   {
     imagName: 'ts.png',
-    name: 'TypesScript',
+    name: 'TypeScript',
     favoringOutcome: Outcome.Frontend
   },
   {
@@ -57,7 +57,7 @@ const cards: Card[] = [
   },
   {
     imagName: 'ilustrator.png',
-    name: 'Ilustrator',
+    name: 'Illustrator',
     favoringOutcome: Outcome.DesignAndUx
   },
   {
@@ -66,7 +66,7 @@ const cards: Card[] = [
     favoringOutcome: Outcome.DesignAndUx
   },
   {
-    imagName: 'iv.png',
+    imagName: 'iv.PNG',
     name: 'InVision',
     favoringOutcome: Outcome.DesignAndUx
   },

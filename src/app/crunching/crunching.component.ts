@@ -16,7 +16,7 @@ export class CrunchingComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       this.router.navigate([Pages.Results]);
-    }, 1800);
+    }, 2000);
   }
 
 }
