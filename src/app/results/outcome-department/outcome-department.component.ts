@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Pages } from 'src/app/shared/models/pages.enum';
 
 @Component({
   selector: 'app-outcome-department',
@@ -9,9 +10,12 @@ export class OutcomeDepartmentComponent implements OnInit {
 
   @Input() personImgSrc: string;
 
+  pages = Pages;
+
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

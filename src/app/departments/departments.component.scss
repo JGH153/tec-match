@@ -1,0 +1,38 @@
+:host {
+	background: black;
+	overflow-y: auto;
+}
+
+.card {
+	height: 180px;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding: 10px;
+
+	.left-card {
+		width: 100px;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-evenly;
+	}
+
+  .person-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 100%;
+    overflow: hidden;
+	}
+	
+	.card-info {
+		height: 100%;
+		width: calc(100vw - 120px);
+		display: flex;
+		flex-direction: column;
+		justify-content: space-evenly;
+		padding: 20px;
+	}
+}

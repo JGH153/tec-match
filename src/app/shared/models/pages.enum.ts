@@ -3,4 +3,5 @@ export enum Pages {
   Cards = 'cards',
   Crunching = 'crunching',
   Results = 'results',
+  Departments = 'departments',
 }

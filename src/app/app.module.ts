@@ -8,6 +8,7 @@ import { CardsModule } from './cards/cards.module';
 import { ResultsModule } from './results/results.module';
 import { WelcomeModule } from './welcome/welcome.module';
 import { MatButtonModule } from '@angular/material/button';
+import { DepartmentsModule } from './departments/departments.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { MatButtonModule } from '@angular/material/button';
     CardsModule,
     ResultsModule,
     WelcomeModule,
-    MatButtonModule
+    MatButtonModule,
+    DepartmentsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

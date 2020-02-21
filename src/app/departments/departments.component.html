@@ -1,0 +1,11 @@
+<div class="card" *ngFor="let department of departments">
+	<div class="left-card">
+		<img src="assets/test-people/{{department.personSrc}}" class="person-img">
+		<button mat-raised-button color="primary-small">Søk</button>
+	</div>
+	<div class="card-info">
+		<div class="name">{{department.name}}</div>
+		<div class="person-info">{{department.personText}}</div>
+		<div class="department-info">{{department.departmentText}}</div>
+	</div>
+</div>

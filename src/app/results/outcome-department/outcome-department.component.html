@@ -4,10 +4,7 @@
 
 <div class="person-group">
 	<div class="person-img-container">
-		<img
-			src="assets/test-people/{{personImgSrc}}"
-			class="person-img"
-		>
+		<img src="assets/test-people/{{personImgSrc}}" class="person-img">
 	</div>
 	<p class="person-text">
 		<ng-content select="personText"></ng-content>
@@ -17,9 +14,9 @@
 	<ng-content select="departmentText"></ng-content>
 </p>
 
+<div class="buttons">
 
+	<button mat-raised-button color="secondary" [routerLink]="['/' + pages.Departments]">Andre avdelinger</button>
 
-<button
-	mat-raised-button
-	color="primary"
->Apply</button>
+	<button mat-raised-button color="primary">Søk</button>
+</div>

@@ -5,6 +5,7 @@ import { ResultsComponent } from './results/results.component';
 import { Pages } from './shared/models/pages.enum';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { CrunchingComponent } from './crunching/crunching.component';
+import { DepartmentsComponent } from './departments/departments.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,11 @@ const routes: Routes = [
     path: Pages.Results,
     component: ResultsComponent,
     data: {animation: 'slideIn'}
+  },
+  {
+    path: Pages.Departments,
+    component: DepartmentsComponent,
+    data: {animation: 'slideIn2'}
   },
 ];
 
